@@ -69,9 +69,6 @@ Player.prototype.reset = function() {
 }
 
 Player.prototype.render = function() {
-    console.log(this.sprite);
-    console.log(this.x);
-    console.log(this.y);
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
