@@ -51,8 +51,7 @@ var Player = function() {
         'images/char-horn-girl.png',
         'images/char-princess-girl.png'
     ];
-    // this.sprite = this.plyrImages[Math.round(Math.random()*4)];
-    this.sprite = 'images/char-boy.png';
+    this.sprite = this.plyrImages[Math.round(Math.random()*4)];
     this.x = 0;
     this.y = 400;
 }
@@ -81,25 +80,21 @@ Player.prototype.handleInput = function(num) {
         case 'left':
             if(this.x > 15){ 
                 this.x -=100;
-                }
+            }
             break;
         case 'up':
             if(this.y > -5){
                 this.y -=90;
-                //reset if plyr reach top
-                if(this.y < -5){
-                    this.reset();
-                }
             }
             break;
         case 'right':
             if(this.x < 400){
-            this.x +=100;
+                this.x +=100;
             }
             break;
         case 'down':
             if(this.y < 375){
-            this.y +=90;
+                this.y +=90;
             }
             break;
     }
@@ -128,11 +123,30 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
+var lives = 3;
 function checkCollisions(enemy, player) {
+    document.getElementById('life').innerHTML = "Life: "+lives;
     for(var i in enemy) {
         if((player.x - enemy[i].x < 50 && player.y - enemy[i].y < 50) && (player.x - enemy[i].x > -50 && player.y - enemy[i].y > -50)) {
            resetPositions();
+           if(lives > 0){
+                lives--;
+            }
+            else {
+                    alert("GAME OVER, YOUR SCORE IS: " + score);
+                    history.go(0);
+            }
         }
+    }
+}
+
+var score = 0;
+
+function reachEnd () {
+    document.getElementById('score').innerHTML = "Score: "+score;
+    if(player.y < 0){
+        score++;
+        player.reset();
     }
 }
 
