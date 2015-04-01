@@ -131,7 +131,15 @@ document.addEventListener('keyup', function(e) {
 function checkCollisions(enemy, player) {
     for(var i in enemy) {
         if((player.x - enemy[i].x < 50 && player.y - enemy[i].y < 50) && (player.x - enemy[i].x > -50 && player.y - enemy[i].y > -50)) {
-            player.reset();
+           resetPositions();
         }
+    }
+}
+
+function resetPositions() {
+    player.reset();
+    for(var i in allEnemies) {
+        allEnemies[i].x = allEnemies[i].startPosX();
+        allEnemies[i].y = allEnemies[i].startPosY();
     }
 }
