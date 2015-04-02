@@ -131,7 +131,8 @@ function checkCollisions(enemy, player) {
             }
             else {
                     alert("GAME OVER, YOUR SCORE IS: " + score);
-                    history.go(0);
+                    lives = 3;
+                    score = 0;
             }
         }
     }
